@@ -14,10 +14,26 @@ export type Mode =
   | 'first byte'
   | 'content transfer'
 
+/**
+ *
+ *
+ * @export
+ * @param {string} region
+ * @param {Mode} [mode='first byte']
+ * @return {*}  {Promise<number>}
+ */
 export async function checkLatency(region: string, mode: Mode = 'first byte'): Promise<number> {
   return doRequest(region, mode).then(Number)
 }
 
+/**
+ *
+ *
+ * @export
+ * @param {string[]} [regions]
+ * @param {Mode} [mode='first byte']
+ * @return {*}  {Promise<Array<RegionLatency>>}
+ */
 export async function checkLatencies(
   regions?: string[],
   mode: Mode = 'first byte',
@@ -44,6 +60,13 @@ export async function checkLatencies(
   return latencies
 }
 
+/**
+ *
+ *
+ * @param {string} region
+ * @param {Mode} mode
+ * @return {*}  {Promise<bigint>}
+ */
 function doRequest(region: string, mode: Mode): Promise<bigint> {
   return new Promise((accept, reject) => {
     const startTime = now()
