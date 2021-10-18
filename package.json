@@ -1,8 +1,9 @@
 {
   "name": "@posterboy/aws-region-latency-checker",
   "version": "0.0.1",
-  "description": "Library for checking AWS regions latency. Based on super cool post https://blog.risingstack.com/measuring-http-timings-node-js/",
-  "main": "lib/index.ts",
+  "description": "Library for checking AWS regions latency.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
