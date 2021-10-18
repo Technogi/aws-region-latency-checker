@@ -1,8 +1,8 @@
 # Welcome to @posterboy/aws-region-latency-checker 👋
-![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/Technogi/aws-region-latency-checker#readme)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Technogi/aws-region-latency-checker/graphs/commit-activity)
-[![License: MIT](https://img.shields.io/github/license/Technogi/@posterboy/aws-region-latency-checker)](https://github.com/Technogi/aws-region-latency-checker/blob/main/LICENSE.md)
+[![License: MIT](https://img.shields.io/github/license/Technogi/@posterboy/aws-region-latency-checker)](https://github.com/Technogi/aws-region-latency-checker/blob/main/LICENSE)
 
 > Library for checking AWS regions latency. Based on super cool post https://blog.risingstack.com/measuring-http-timings-node-js/
 
@@ -69,7 +69,7 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2021 [carlos@technogi.com.mx](https://github.com/Technogi).
 
-This project is [MIT](https://github.com/Technogi/aws-region-latency-checker/blob/main/LICENSE.md) licensed.
+This project is [MIT](https://github.com/Technogi/aws-region-latency-checker/blob/main/LICENSE) licensed.
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
