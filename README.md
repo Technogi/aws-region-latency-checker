@@ -8,10 +8,6 @@
 
 ### 🏠 [Homepage](https://github.com/Technogi/aws-region-latency-checker#readme)
 
-## Description
-
-Library for checking AWS regions latency. Based on super cool post https://blog.risingstack.com/measuring-http-timings-node-js/
-
 ## Install
 
 ```sh
