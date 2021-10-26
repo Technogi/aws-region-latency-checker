@@ -1,4 +1,3 @@
-import { request } from 'https'
 import { DefaultAWSRegions } from './constants'
 
 export type RegionLatency = {
@@ -13,6 +12,23 @@ export type Mode =
   | 'tls handshake'
   | 'first byte'
   | 'content transfer'
+
+export type Implementation = 'axios' | 'https'
+
+export async function doRequest(
+  region: string,
+  mode: Mode = 'content transfer',
+  implementation: Implementation = 'axios',
+): Promise<bigint> {
+  switch (implementation) {
+    case 'https':
+      const httpRequest = await import('./https-request')
+      return httpRequest.default(region, mode)
+    default:
+      const axiosRequest = await import('./axios-request')
+      return axiosRequest.default(region, mode)
+  }
+}
 
 /**
  *
@@ -36,7 +52,7 @@ export async function checkLatency(region: string, mode: Mode = 'first byte'): P
  */
 export async function checkLatencies(
   regions?: string[],
-  mode: Mode = 'first byte',
+  mode: Mode = 'content transfer',
 ): Promise<Array<RegionLatency>> {
   if (!regions || regions.length === 0) regions = DefaultAWSRegions
 
@@ -58,59 +74,4 @@ export async function checkLatencies(
   }
 
   return latencies
-}
-
-/**
- *
- *
- * @param {string} region
- * @param {Mode} mode
- * @return {*}  {Promise<bigint>}
- */
-function doRequest(region: string, mode: Mode): Promise<bigint> {
-  return new Promise((accept, reject) => {
-    const startTime = now()
-    const elapsed = () => now() - startTime
-
-    const req = request(
-      {
-        host: `ec2.${region}.amazonaws.com`,
-        path: '/ping',
-      },
-      (res) => {
-        res.once('readable', () => {
-          if (mode === 'first byte') return accept(elapsed())
-        })
-        if (mode === 'content transfer') {
-          res.on('data', () => {
-            //do nothing
-          })
-          res.on('end', () => {
-            return accept(elapsed())
-          })
-          res.on('error', (e) => reject(e))
-        }
-      },
-    )
-
-    req.on('error', (e) => reject(e))
-    req.on('socket', (socket) => {
-      socket.on('lookup', () => {
-        if (mode === 'dns lookup') return accept(elapsed())
-      })
-
-      socket.on('connect', () => {
-        if (mode === 'tcp connection') return accept(elapsed())
-      })
-
-      socket.on('secureConnect', () => {
-        if (mode === 'tls handshake') return accept(elapsed())
-      })
-    })
-    req.end()
-  })
-}
-
-function now(): bigint {
-  return process.hrtime.bigint()
 }

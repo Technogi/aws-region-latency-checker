@@ -23,7 +23,11 @@ Just import the library select the region and select the mode for latency resolu
 - 'tcp connection'
 - 'tls handshake'
 - 'first byte'
-- 'content transfer'
+- 'content transfer' (*default)
+
+### Implementations
+- axios (*default)
+- https
 
 ### Example
 
@@ -34,7 +38,7 @@ import {checkLatencies,checkLatency} from '@posterboy/aws-region-latency-checker
 const results = await checkLatencies()
 
 // specify regions and mode
-const results = await checkLatencies(['us-west-2','us-east-1'],'dns-lookup')
+const results = await checkLatencies(['us-west-2','us-east-1'],'dns-lookup','https')
 
 // check latency for a single region
 const results = await checkLatency('us-east-1','dns-lookup')
