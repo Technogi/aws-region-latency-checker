@@ -15,10 +15,10 @@ export default async function doRequest(
     case 'tcp connection':
     case 'tls handshake':
     default:
-      throw new Error(`${mode} not implemented`)
+      throw new Error(`${mode} not implemented. Only 'content transfer is implemented in axios'`)
   }
 }
 
 function now(): bigint {
-  return process.hrtime.bigint()
+  return BigInt(Date.now())
 }
